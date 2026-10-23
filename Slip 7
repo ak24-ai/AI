@@ -8,22 +8,20 @@ contains the letter ‘a’. [10 marks]
 Program: 
 
 import pandas as pd
-# Create employee DataFrame
+
 data = {
- 'Employee Name': ['Rahul', 'Amit', 'Sneha', 
-'Karan', 'Priya', 'Rohan'], 'Department': ['IT', 'HR', 'IT', 'IT', 'Finance', 
-'IT'],
- 'Salary': [60000, 55000, 48000, 75000, 65000, 
-52000]
+    'Employee Name': ['Rahul', 'Amit', 'Sneha', 'Karan', 'Priya', 'Rohan'], 
+    'Department': ['IT', 'HR', 'IT', 'IT', 'Finance', 'IT'],
+    'Salary': [60000, 55000, 48000, 75000, 65000, 52000]
 }
 df = pd.DataFrame(data)
 print("Employee Data:")
 print(df)
-# Apply all conditions
+
 result = df[
- (df['Department'] == 'IT') &
- (df['Salary'] > 50000) &
- (df['Employee Name'].str.contains('a', 
+     (df['Department'] == 'IT') &
+     (df['Salary'] > 50000) &
+     (df['Employee Name'].str.contains('a', 
 case=False))
 ]
 print("\nEmployees satisfying all conditions:")
@@ -39,42 +37,33 @@ any value other than OPEN or CLOSED.
 
 Program
 
-# Model-Based Agent for Smart Home Security
 previous_status = input("Enter previous door status 
 (OPEN/CLOSED): ").upper()
 current_status = input("Enter current door status 
 (OPEN/CLOSED): ").upper()
-# Check for valid input
+
 if previous_status not in ["OPEN", "CLOSED"] or
 current_status not in ["OPEN", "CLOSED"]:
- print("Error: Invalid door status. Enter only 
+    print("Error: Invalid door status. Enter only 
 OPEN or CLOSED.")
 else:
- print("\nPrevious Door Status:", previous_status)
- print("Current Door Status :", current_status)
- # Model-based decision
- if previous_status == "CLOSED" and current_status
-== "OPEN":
- action = "Door opened. Trigger security 
-alert!"
- elif previous_status == "OPEN" and current_status
+    print("\nPrevious Door Status:", previous_status)
+    print("Current Door Status :", current_status)
+ 
+    if previous_status == "CLOSED" and current_status== "OPEN":
+       action = "Door opened. Trigger security alert!"
+    elif previous_status == "OPEN" and current_status
 == "CLOSED":
- action = "Door closed. Security status 
+        action = "Door closed. Security status 
 normal."
- elif previous_status == "OPEN" and current_status
+    elif previous_status == "OPEN" and current_status
 == "OPEN":
- action = "Door remains open. Continue 
-monitoring." else:
- action = "Door remains closed. Security 
-status normal."
- print("Security Action :", action)
-Sample Output 1
-Enter previous door status (OPEN/CLOSED): CLOSED
-Enter current door status (OPEN/CLOSED): OPEN
-Previous Door Status: CLOSED
-Current Door Status : OPEN
-Security Action : Door opened. Trigger security 
-alert!
+        action = "Door remains open. Continue 
+monitoring." 
+    else:
+        action = "Door remains closed. Security status normal."
+    print("Security Action :", action)
+
 
 
 OR
@@ -85,30 +74,31 @@ graph traversal. Display the traversal order starting from a given source vertex
 Program
 
 from collections import deque
-# Graph represented using adjacency list
+
 graph = {
- 'A': ['B', 'C'],
- 'B': ['D', 'E'],
- 'C': ['F'],
- 'D': [],
- 'E': ['F'],
- 'F': []
-} def bfs(graph, start):
- visited = set()
- queue = deque()
- visited.add(start)
- queue.append(start)
- print("BFS Traversal:", end=" ")
- while queue:
- vertex = queue.popleft()
- print(vertex, end=" ")
- for neighbour in graph[vertex]:
- if neighbour not in visited:
- visited.add(neighbour)
- queue.append(neighbour)
-# Accept source vertex
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['F'],
+    'F': []
+}
+def bfs(graph, start):
+    visited = set()
+    queue = deque()
+    visited.add(start)
+    queue.append(start)
+    print("BFS Traversal:", end=" ")
+    while queue:
+        vertex = queue.popleft()
+        print(vertex, end=" ")
+        for neighbour in graph[vertex]:
+            if neighbour not in visited:
+                visited.add(neighbour)
+                queue.append(neighbour)
+
 source = input("Enter source vertex (A-F): ").upper()
 if source in graph:
- bfs(graph, source)
+    bfs(graph, source)
 else:
- print("Invalid source vertex.")
+    print("Invalid source vertex.")
