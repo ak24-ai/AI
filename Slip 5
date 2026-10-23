@@ -17,30 +17,29 @@ print("Monkey Position :", monkey_position)
 print("Box Position :", box_position)
 print("Banana Position :", banana_position)
 
-if monkey_position != box_position: print("\nMonkey moves from", monkey_position, 
-"to", box_position)
- monkey_position = box_position
+if monkey_position != box_position:
+   print("\nMonkey moves from", monkey_position, "to", box_position)
+   monkey_position = box_position
 
 if monkey_position == box_position:
- print("Monkey pushes the box under the banana")
- box_position = banana_position
+   print("Monkey pushes the box under the banana")
+   box_position = banana_position
 
 if monkey_position == box_position:
- print("Monkey climbs on the box")
- monkey_position = "on_box"
+   print("Monkey climbs on the box")
+   monkey_position = "on_box"
 
-if monkey_position == "on_box" and box_position ==
-banana_position:
- print("Monkey takes the banana")
- banana_obtained = True
+if monkey_position == "on_box" and box_position ==banana_position:
+   print("Monkey takes the banana")
+   banana_obtained = True
 else:
- banana_obtained = False
+    banana_obtained = False
 
 if banana_obtained:
- print("\nGoal State Achieved!")
- print("Monkey has obtained the banana.")
+   print("\nGoal State Achieved!")
+   print("Monkey has obtained the banana.")
 else:
- print("\nGoal State Not Achieved.")
+   print("\nGoal State Not Achieved.")
 
 
 Q2)B.Apply Linear Regression on a YouTube Video dataset to predict video 
@@ -56,10 +55,8 @@ import matplotlib.pyplot as plt
 from sklearn.linear_model import LinearRegression
 
 data = {
- 'Likes': [100, 250, 400, 550, 700, 900, 1100, 
-1300, 1500, 1800],
- 'Views': [2000, 4500, 7000, 9500, 12000, 15000, 
-19000, 22000, 25000, 30000]
+    'Likes': [100, 250, 400, 550, 700, 900, 1100, 1300, 1500, 1800],
+    'Views': [2000, 4500, 7000, 9500, 12000, 15000, 19000, 22000, 25000, 30000]
 }
 df = pd.DataFrame(data)
 print("YouTube Video Dataset:")
@@ -80,9 +77,9 @@ plt.scatter(df['Likes'], df['Views'], label="Actual
 Data")
 
 plt.plot(
- df['Likes'],
- model.predict(X),
- label="Regression Line"
+    df['Likes'],
+    model.predict(X),
+    label="Regression Line"
 )
 plt.xlabel("Number of Likes")
 plt.ylabel("Number of Views")
@@ -104,21 +101,19 @@ Program
 print("Simple Chatbot")
 print("Type 'bye' to exit the chatbot.")
 while True:
- user_input = input("You: ").lower()
- if user_input == "hello" or user_input == "hi":
- print("Bot: Hello! How can I help you?")
- elif user_input == "how are you":
- print("Bot: I am fine. Thank you!")
- elif user_input == "what is your name":
- print("Bot: My name is SimpleBot.")
- elif user_input == "what can you do":
- print("Bot: I can answer simple predefined 
-questions.")
- elif user_input == "thank you" or user_input ==
-"thanks":
- print("Bot: You are welcome!")
- elif user_input == "bye":
- print("Bot: Goodbye! Have a nice day.")
- break
- else:
- print("Bot: Sorry, I don't understand that.")
+    user_input = input("You: ").lower()
+    if user_input == "hello" or user_input == "hi":
+        print("Bot: Hello! How can I help you?")
+    elif user_input == "how are you":
+        print("Bot: I am fine. Thank you!")
+    elif user_input == "what is your name":
+        print("Bot: My name is SimpleBot.")
+    elif user_input == "what can you do":
+        print("Bot: I can answer simple predefined questions.")
+    elif user_input == "thank you" or user_input =="thanks":
+        print("Bot: You are welcome!")
+   elif user_input == "bye":
+        print("Bot: Goodbye! Have a nice day.")
+        break
+   else:
+       print("Bot: Sorry, I don't understand that.")
