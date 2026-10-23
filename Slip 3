@@ -31,7 +31,7 @@ data = {
     'Age': [18, 20, 22, 25, 28, 30, 35, 40, 45, 50],
     'Exercise_Hours': [6, 7, 5, 6, 4, 5, 3, 2, 2, 1],
     'Fitness': ['FIT', 'FIT', 'FIT', 'FIT', 'FIT',
-    'FIT', 'UNFIT', 'UNFIT', 'UNFIT', 'UNFIT']
+                'FIT', 'UNFIT', 'UNFIT', 'UNFIT', 'UNFIT']
 }
 df = pd.DataFrame(data)
 print("Training Data:")
@@ -57,7 +57,7 @@ for i in range(n):
 
 input_df = pd.DataFrame(
  people,
- columns=['Age', 'Exercise_Hours']
+     columns=['Age', 'Exercise_Hours']
 )
 
 predictions = model.predict(input_df)
@@ -65,9 +65,10 @@ predictions = model.predict(input_df)
 print("\nFitness Prediction:")
 print("------------------------------")
 for i in range(n):
-    print( "Person", i + 1,
-   "Age:", input_df.iloc[i]['Age'],
-   "Exercise Hours:", 
+    print( 
+        "Person", i + 1,
+        "Age:", input_df.iloc[i]['Age'],
+        "Exercise Hours:", 
 input_df.iloc[i]['Exercise_Hours'],
         "Fitness:", predictions[i]
  )
@@ -82,41 +83,42 @@ Program
 
 def is_safe(board, row, col, n):
 
- for i in range(row):
- if board[i] == col:
- return False
+    for i in range(row):
+        if board[i] == col:
+           return False
  
  for i in range(row):
- if board[i] - i == col - row:
- return False # Check upper-right diagonal
+     if board[i] - i == col - row:
+          return False 
  for i in range(row):
      if board[i] + i == col + row:
-        return False
+         return False
  return True
 def solve_n_queens(board, row, n):
  
- if row == n:
- return True
+    if row == n:
+        return True
  
- for col in range(n):
- if is_safe(board, row, col, n):
- board[row] = col
+    for col in range(n):
+        if is_safe(board, row, col, n):
+            board[row] = col
  
- if solve_n_queens(board, row + 1, n):
- return True
+            if solve_n_queens(board, row + 1, n):
+               return True
 
- board[row] = -1
+            board[row] = -1
  return False
 
 n = int(input("Enter the value of N: "))
 board = [-1] * n
 if solve_n_queens(board, 0, n):
- print("\nSolution:")
- for row in range(n):
- for col in range(n):
- if board[row] == col: print("Q", end=" ")
- else:
- print(".", end=" ")
+   print("\nSolution:")
+   for row in range(n):
+       for col in range(n):
+            if board[row] == col: 
+               print("Q", end=" ")
+            else:
+               print(".", end=" ")
  print()
 else:
  print("No solution exists.")
