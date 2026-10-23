@@ -29,10 +29,10 @@ age = int(input("\nEnter person's age: "))
 prediction = model.predict([[age]])
 
 if prediction[0] == 1:
- print("Person is Eligible to Vote.")
+    print("Person is Eligible to Vote.")
 else:
- print("Person is Not Eligible to Vote.")
-
+    print("Person is Not Eligible to Vote.")
+ 
 Q2) B.Write a python program to Implement Alpha-Beta Pruning . 
 [20 marks]
 
@@ -42,41 +42,42 @@ Program
 def alpha_beta(depth, node, alpha, beta, 
 maximizing_player):
  
- if depth == 3:
- return values[node]
- if maximizing_player:
- best = -999
- for i in range(2):
- value = alpha_beta(
- depth + 1,
- node * 2 + i,
- alpha,
- beta,
- False
+    if depth == 3:
+         return values[node]
+    if maximizing_player:
+         best = -999
+         for i in range(2):
+             value = alpha_beta(
+                 depth + 1,
+                 node * 2 + i,
+                 alpha,
+                 beta,
+                 False
  )
- best = max(best, value)
- alpha = max(alpha, best)
- 
- if beta <= alpha:
- print("Beta Pruning at node:", node)
- break return best
- else:
- best = 999
- for i in range(2):
- value = alpha_beta(
- depth + 1,
- node * 2 + i,
- alpha,
- beta,
- True
+             best = max(best, value)
+             alpha = max(alpha, best)
+  
+             if beta <= alpha:
+                 print("Beta Pruning at node:", node)
+                 break 
+            return best
+       else:
+            best = 999
+            for i in range(2):
+                value = alpha_beta(
+                     depth + 1,
+                     node * 2 + i,
+                     alpha,
+                     beta,
+                     True
  )
- best = min(best, value)
- beta = min(beta, best)
+                best = min(best, value)
+                beta = min(beta, best)
  
- if beta <= alpha:
- print("Alpha Pruning at node:", node)
- break
- return best
+                if beta <= alpha:
+                     print("Alpha Pruning at node:", node)
+                     break
+             return best
 
 values = [3, 5, 6, 9, 1, 2, 0, -1]
 
@@ -104,17 +105,17 @@ from sklearn.datasets import load_iris
 iris = load_iris()
 
 df = pd.DataFrame(
- iris.data,
- columns=iris.feature_names
+     iris.data,
+     columns=iris.feature_names
 )
 df['Species'] = iris.target
 
 for species in df['Species'].unique():
- data = df[df['Species'] == species]
- plt.scatter(
- data['sepal length (cm)'],
- data['sepal width (cm)'],
- label=iris.target_names[species]
+    data = df[df['Species'] == species]
+    plt.scatter(
+        data['sepal length (cm)'],
+        data['sepal width (cm)'],
+        label=iris.target_names[species]
  )
 
 plt.xlabel("Sepal Length (cm)")
