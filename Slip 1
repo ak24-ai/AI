@@ -1,122 +1,78 @@
-SLIP 1
+Slip 1
 
-Q1) A .Write a python program to show proper indentation using if statement. 
-[10 marks]
+Q1 [A] DataFrame & Head [10 Marks]
 
-Program :
+import pandas as pd
 
-num = int(input("Enter a number: "))
-if num > 0:
-     print("The number is positive.")
-     print("This statement is inside the if block.")
-print("Program execution completed.")
+data = {
+    'Employee_Name': ['Alice', 'Bob', 'Charlie', 'David', 'Eva', 'Frank', 'Grace', 'Henry'],
+    'Department': ['HR', 'IT', 'Finance', 'IT', 'HR', 'Finance', 'IT', 'Marketing'],
+    'Designation': ['Manager', 'Developer', 'Analyst', 'Developer', 'Executive', 'Manager', 'Lead', 'Executive'],
+    'Salary': [60000, 75000, 50000, 70000, 45000, 80000, 90000, 48000]
+}
 
-Sample Output
+df = pd.DataFrame(data)
 
 
+print("First 5 Records:")
+print(df.head(5))
 
-Q2) B .Write a python program to implement Water Jug Problem. [20 marks]
+Q2 [B] Encoding Student Data [20 Marks]
 
-Programme :
+import pandas as pd
+from sklearn.preprocessing import LabelEncoder
 
-from collections import deque
-def water_jug_problem(capacity1, capacity2, target):
-    visited = set()
-    queue = deque()
- 
-    queue.append(((0, 0), []))
-    visited.add((0, 0))
-    while queue:
-         (jug1, jug2), path = queue.popleft()
- 
-         if jug1 == target or jug2 == target:
-             print("\nSolution Path:") 
-             for step in path:
-                  print(step)
-             print("Goal State:", (jug1, jug2))
-             return
-    states = []
 
-    states.append(((capacity1, jug2), "Fill Jug 1"))
- 
-    states.append(((jug1, capacity2), "Fill Jug 2"))
- 
- states.append(((0, jug2), "Empty Jug 1"))
- 
- states.append(((jug1, 0), "Empty Jug 2"))
- 
- amount = min(jug1, capacity2 - jug2)
- states.append(
-      ((jug1 - amount, jug2 + amount),
-       "Pour Jug 1 -> Jug 2")
- )
- 
- amount = min(jug2, capacity1 - jug1)
- states.append(
-      ((jug1 + amount, jug2 - amount),
-      "Pour Jug 2 -> Jug 1")
- )
- for new_state, action in states:
-     if new_state not in visited:
-         visited.add(new_state)
-         queue.append(
-              (new_state, path + [action])
- )
- print("No solution exists.") # Main program
-capacity1 = 4
-capacity2 = 3
-target = 2
+raw_data = {
+    'Name': ['Smaran', 'Sachin', 'Samarpan', 'Spandan', 'Shravan'],
+    'Address': ['Pune', 'Mumbai', 'Delhi', 'Chennai', 'Madurai'],
+    'Age': [20, 23, 19, 21, 22],
+    'Class': ['BE', 'BSc(CS)', 'BVOC', 'BCom', 'BSc']
+}
+pd.DataFrame(raw_data).to_csv('StudentData.csv', index=False)
 
-print("Water Jug Problem")
-print("Jug 1 Capacity:", capacity1, "litres")
-print("Jug 2 Capacity:", capacity2, "litres")
-print("Target:", target, "litres")
-water_jug_problem(capacity1, capacity2, target)
+
+df = pd.read_csv('StudentData.csv')
+
+
+df_encoded = pd.get_dummies(df, columns=['Name'])
+
+
+le = LabelEncoder()
+df_encoded['Class_Encoded'] = le.fit_transform(df['Class'])
+
+print(df_encoded)
 
 
 
-OR
+Q2 [B - OR] Random Integer Plotting [20 Marks]
 
-Q2)B.Write a python program to design a Model-Based Agent that maintains 
-an internal state of room cleanliness and decides actions based on both 
-current perception and stored memory.
+import numpy as np
+import matplotlib.pyplot as plt
 
-class ModelBasedAgent:
- def __init__(self):
- 
- self.room_state = {
- "Room": "Unknown"
- } def perceive(self, room):
- 
- return room
- def update_state(self, room, perception):
- 
- self.room_state[room] = perception
- def choose_action(self, room):
- 
- if self.room_state[room] == "Dirty":
- return "Clean the room"
- elif self.room_state[room] == "Clean":
- return "Room is already clean"
- else:
- return "Check the room"
- def run(self, room, perception):
- current_perception =
-self.perceive(perception)
- 
- self.update_state(room, current_perception)
- 
- action = self.choose_action(room)
- print("Current Perception :", 
-current_perception)
- print("Internal State :", 
-self.room_state[room])
- print("Action :", action)
 
-agent = ModelBasedAgent()
+np.random.seed(42)
+data = np.random.randint(1, 100, 25)
 
-print("First Observation")
-agent.run("Room", "Dirty")
-# Second perception print("\nSecond Observation")
-agent.run("Room", "Clean")
+fig, axes = plt.subplots(2, 2, figsize=(10, 8))
+
+
+axes[0, 0].plot(data, color='blue', marker='o')
+axes[0, 0].set_title('Line Chart')
+
+
+axes[0, 1].scatter(range(len(data)), data, color='red')
+axes[0, 1].set_title('Scatter Plot')
+
+
+axes[1, 0].hist(data, bins=5, color='green', edgecolor='black')
+axes[1, 0].set_title('Histogram')
+
+
+axes[1, 1].boxplot(data, patch_artist=True)
+axes[1, 1].set_title('Box Plot')
+
+plt.tight_layout()
+plt.show()
+
 
