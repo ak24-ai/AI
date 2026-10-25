@@ -1,0 +1,49 @@
+Slip 22
+
+Q1 [A] List to DataFrame Conversion [10 Marks]
+
+Python
+import pandas as pd
+
+subjects = ['Data Science', 'OS', 'Java', 'Web Dev']
+marks = [85, 78, 92, 88]
+
+df = pd.DataFrame({'Subject': subjects, 'Marks': marks})
+print(df)
+
+
+Q2 [B] CSV Basic Operations [20 Marks]
+
+import pandas as pd
+
+
+pd.DataFrame({'A': [10, 20, 30, 40, 50]}).to_csv('data.csv', index=False)
+
+df = pd.read_csv('data.csv')
+
+print("DataFrame:\n", df)
+print("\ndescribe():\n", df.describe())
+print("\nhead():\n", df.head(2))
+print("\ntail():\n", df.tail(2))
+print("\nmax():\n", df.max())
+print("\nmin():\n", df.min())
+
+
+
+Q2 [B - OR] Custom Matplotlib Styling [20 Marks]
+
+Python
+import matplotlib.pyplot as plt
+
+x = [1, 2, 3, 4, 5]
+y = [10, 20, 25, 30, 50]
+
+fig, ax = plt.subplots(figsize=(8, 5))
+ax.plot(x, y, linewidth=3, color='darkgreen', linestyle='--', marker='o')
+
+ax.set_title("Customized Figure", fontsize=14)
+ax.set_xlabel("X Axis Label", fontsize=12)
+ax.set_ylabel("Y Axis Label", fontsize=12)
+ax.grid(True)
+
+plt.show()
