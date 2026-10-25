@@ -1,0 +1,55 @@
+Slip 23
+
+Q1 [A] Product Price Summary [10 Marks]
+
+
+Python
+import pandas as pd
+
+df = pd.DataFrame({
+    'Product': ['A', 'B', 'C', 'D', 'E'],
+    'Price': [100, 250, 400, 150, 300]
+})
+
+print("DataFrame:\n", df)
+print(f"Max Price: {df['Price'].max()}")
+print(f"Min Price: {df['Price'].min()}")
+print(f"Avg Price: {df['Price'].mean():.2f}")
+
+
+Q2 [B] L1 Normalization [20 Marks]
+
+Python
+import numpy as np
+from sklearn.preprocessing import normalize
+
+data = np.array([[10, 20, 30], [40, 50, 60]])
+l1_normalized = normalize(data, norm='l1', axis=1)
+
+print("Original Data:\n", data)
+print("\nL1 Normalized Data (Row Sum = 1):\n", l1_normalized)
+print("Row Sums:", np.sum(l1_normalized, axis=1))
+
+
+Q2 [B - OR] Rescaling & Normalization on Diabetes Dataset [20 Marks]
+
+Python
+import pandas as pd
+from sklearn.preprocessing import MinMaxScaler, StandardScaler, normalize
+
+url = "https://raw.githubusercontent.com/jbrownlee/Datasets/master/pima-indians-diabetes.data.csv"
+df = pd.read_csv(url, header=None)
+num_df = df.iloc[:, :-1]
+
+
+min_max = MinMaxScaler().fit_transform(num_df)
+
+
+standardized = StandardScaler().fit_transform(num_df)
+
+
+unit_length = normalize(num_df, norm='l2')
+
+print("Min-Max Scaled (First Row):", min_max[0])
+print("Standardized (First Row):", standardized[0])
+print("Unit Length (First Row):", unit_length[0])
