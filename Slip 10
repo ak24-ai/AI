@@ -1,0 +1,70 @@
+Slip 10
+
+Q1 [A] Mean, Median, Mode [10 Marks]
+
+import pandas as pd
+
+student_data = {
+    'Roll No': [1, 2, 3, 4, 5],
+    'Name': ['A', 'B', 'C', 'D', 'E'],
+    'Percentage': [85.5, 90.0, 85.5, 78.0, 92.5]
+}
+df = pd.DataFrame(student_data)
+
+print(f"Mean Percentage: {df['Percentage'].mean():.2f}")
+print(f"Median Percentage: {df['Percentage'].median()}")
+print(f"Mode Percentage: {df['Percentage'].mode()[0]}")
+
+
+
+Q2 [B] DataFrame Exploration & Missing Values [20 Marks]
+
+Python
+import pandas as pd
+import numpy as np
+
+
+data = {
+    'emp_name': [f'Emp_{i}' for i in range(1, 11)],
+    'age': np.random.randint(25, 50, 10),
+    'salary': np.random.randint(30000, 80000, 10)
+}
+df = pd.DataFrame(data)
+
+
+print("Shape:", df.shape)
+print("\nDescription:\n", df.describe())
+
+
+extra_rows = pd.DataFrame({
+    'emp_name': ['Emp_1', 'Emp_2', None, 'Emp_11', 'Emp_12'],
+    'age': [df['age'].iloc[0], None, 30, 40, 45],
+    'salary': [df['salary'].iloc[0], 50000, None, 60000, 70000]
+})
+
+df = pd.concat([df, extra_rows], ignore_index=True)
+df['Department'] = np.nan
+
+print("\nUpdated DataFrame:")
+print(df)
+                 
+
+ Q2 [B - OR] Data Discretization [20 Marks]
+                 
+Python
+import pandas as pd
+import numpy as np
+
+
+pd.DataFrame({'Marks': [35, 55, 72, 88, 95, 42, 68]}).to_csv('Student_Marks.csv', index=False)
+
+df = pd.read_csv('Student_Marks.csv')
+print("Before Discretization:\n", df)
+
+bins = [0, 40, 60, 80, 100]
+labels = ['Poor', 'Average', 'Good', 'Excellent']
+
+df['Performance'] = pd.cut(df['Marks'], bins=bins, labels=labels)
+
+print("\nAfter Discretization:\n", df)
+
