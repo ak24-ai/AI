@@ -1,111 +1,64 @@
 Slip 21
 
-Q1)A.Write a python program to predict if a student is Eligible to take 
-admission (marks ≥ 55) using simple Logistic Classification. Accept student 
-marks from user. [10 marks]
+Q1 [A] Conditional Grouping [10 Marks]
 
-Program
+Python
+import numpy as np
+
+marks = np.array([45, 88, 92, 67, 30, 75, 82, 55, 95, 40])
+
+group1 = np.sum(marks < 50)
+group2 = np.sum((marks >= 50) & (marks < 75))
+group3 = np.sum(marks >= 75)
+
+print(f"Group 1 (<50): {group1} students")
+print(f"Group 2 (50-74): {group2} students")
+print(f"Group 3 (>=75): {group3} students")
+
+
+Q2 [B] 50 Integers Visualizations with Outliers [20 Marks]
 
 import numpy as np
-from sklearn.linear_model import LogisticRegression
+import matplotlib.pyplot as plt
 
-marks = np.array([30, 40, 45, 50, 55, 60, 65, 70, 80, 
-90]).reshape(-1, 1)
-
-admission = [0, 0, 0, 0, 1, 1, 1, 1, 1, 1]
-
-model = LogisticRegression()
-model.fit(marks, admission)
-
-student_marks = float(input("Enter student's marks: 
-"))
-
-prediction = model.predict([[student_marks]])
-if prediction[0] == 1:
-    print("Student is Eligible to take admission.") 
-else:
-   print("Student is Not Eligible to take 
-admission.")
+np.random.seed(42)
+data = np.random.randint(10, 50, 50)
 
 
-Q2)B.write a python program to load item.csv containing cost and type of item 
-and perform basic data exploration
-a. Display the first four rows of item dataset
-b. Print the shape of the dataset.
-c. Show column names.
-d. Identify missing values
-e. Display dataset inf 
-[20 marks]
+plt.figure(figsize=(8, 4))
+plt.subplot(1, 2, 1)
+plt.boxplot(data)
+plt.title('Original Boxplot')
 
-Program: Basic Data Exploration of item.csv
+data_with_outliers = np.append(data, [150, -50])
 
-Assume the item.csv file contains two columns: Cost and Type.
+plt.subplot(1, 2, 2)
+plt.boxplot(data_with_outliers)
+plt.title('Boxplot with Outliers')
 
-item.csv
-Cost,Type
-500,Electronics
-250,Stationery
-1200,Furniture
-300,Clothing
-800,Electronics
-450,Stationery
+plt.tight_layout()
+plt.show()
 
 
-Program
+Q2 [B - OR] Overlapping Normal Distribution Histograms [20 Marks]
 
-import pandas as pd # Load item.csv
-df = pd.read_csv("item.csv")
+Python
+import numpy as np
+import matplotlib.pyplot as plt
 
-print("First four rows of the dataset:")
-print(df.head(4))
+np.random.seed(42)
+d1 = np.random.normal(loc=50, scale=10, size=500)
+d2 = np.random.normal(loc=60, scale=15, size=500)
 
-print("\nShape of the dataset:")
-print(df.shape)
+plt.hist(d1, bins=20, alpha=0.5, label='Dataset 1', color='blue', edgecolor='black')
+plt.hist(d2, bins=20, alpha=0.5, label='Dataset 2', color='red', edgecolor='black')
 
-print("\nColumn names:")
-print(df.columns)
-
-print("\nMissing values:")
-print(df.isnull().sum())
-
-print("\nDataset Information:")
-df.info()
+plt.title('Histograms of Two Normal Distributions')
+plt.legend()
+plt.show()
 
 
-Or
-
-Q2)B.Write a python program to simulate a Goal-Based Agent for a simple 
-navigation problem. The agent should accept the current location and goal 
-location as input and determine the next action required to move toward the 
-goal. Display the current state, goal state, and selected action.
- 
-[20 marks]
 
 
-Program: 
-A → B → C → D → E
 
 
-path = ["A", "B", "C", "D", "E"]
-
-current_location = input("Enter current location (A-
-E): ").upper()
-goal_location = input("Enter goal location (A-E): 
-").upper()
-
-print("\nCurrent State :", current_location)
-print("Goal State :", goal_location)
-
-current_position = path.index(current_location)
-goal_position = path.index(goal_location)
-
-if current_position < goal_position:
-    next_location = path[current_position + 1]
-    action = "Move Forward to " + next_location
-elif current_position > goal_position:
-    next_location = path[current_position - 1]
-    action = "Move Backward to " + next_location
-else:
-   action = "Goal Reached"
-
-print("Selected Action:", action)
