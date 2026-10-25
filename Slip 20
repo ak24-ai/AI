@@ -1,90 +1,72 @@
 Slip 20
 
-Q1)A.Write a python program for Multiple Linear Regression that loads data 
-from a CSV file to predict Sales based on Advertising Budget (TV, Radio, 
-Newspaper). [10 marks]
+Q1 [A] Variance and Standard Deviation [10 Marks]
 
-Program
+Python
+import numpy as np
 
+arr = np.array([10, 20, 30, 40, 50, 60, 70, 80, 90, 100])
+
+print("Variance:", np.var(arr))
+print("Standard Deviation:", np.std(arr))
+
+
+
+Q2 [B] Outliers Impact Analysis [20 Marks]
+
+
+Python
+import numpy as np
 import pandas as pd
-from sklearn.linear_model import LinearRegression
-# Load data from CSV file
-df = pd.read_csv("advertising.csv")
+from scipy import stats
 
-print("Advertising Dataset:")
-print(df)
+data = np.array([10, 12, 14, 15, 16, 18, 20, 22, 100]) # 100 is outlier
 
+def stats_report(arr, label):
+    print(f"--- {label} ---")
+    print(f"Mean: {np.mean(arr):.2f}, Median: {np.median(arr):.2f}, Std Dev: {np.std(arr):.2f}\n")
 
-X = df[['TV', 'Radio', 'Newspaper']]
-
-
-y = df['Sales']
-
-model = LinearRegression()
-model.fit(X, y)
-
-tv = float(input("\nEnter TV Advertising Budget: "))
-radio = float(input("Enter Radio Advertising Budget: 
-"))
-newspaper = float(input("Enter Newspaper Advertising 
-Budget: "))
-
-new_data = pd.DataFrame(
-    [[tv, radio, newspaper]],
-    columns=['TV', 'Radio', 'Newspaper']
-)
-
-prediction = model.predict(new_data) 
-print("\nPredicted Sales:", prediction[0])
-
-Sample advertising.csv
-
-Save the CSV file in the same folder as the Python program.
-TV,Radio,Newspaper,Sales
-230.1,37.8,69.2,22.1
-44.5,39.3,45.1,10.4
-17.2,45.9,69.3,9.3
-151.5,41.3,58.5,18.5
-180.8,10.8,58.4,12.9
-8.7,48.9,75.0,7.2
-57.5,32.8,23.5,11.8
-120.2,19.6,11.6,13.2
-199.8,2.6,21.2,10.6
-66.1,5.8,24.2,8.6
+stats_report(data, "Original Data")
 
 
-Q2) B.Write a python program clean the dataset by handling missing and 
-duplicate values use any Dataset
-
-a. Check missing values
-b. Check duplicated rows.
-c. Remove duplicates
-d. Store cleaned dataset in a new CSV file. 
+Q1 = np.percentile(data, 25)
+Q3 = np.percentile(data, 75)
+IQR = Q3 - Q1
+filtered_iqr = data[(data >= Q1 - 1.5 * IQR) & (data <= Q3 + 1.5 * IQR)]
+stats_report(filtered_iqr, "After IQR Removal")
 
 
-OR 
-
-Q2) B.Write a program to for DataFrame of customer with Salary and 
-Experience: If Experience < 5 years, increase salary by 11.5%, else increase by 
-6.5%. and display updated DataFrame.
-Python program using Pandas DataFrame:
+z_scores = np.abs(stats.zscore(data))
+filtered_z = data[z_scores < 2]
+stats_report(filtered_z, "After Z-Score Removal")
 
 
+Q2 [B - OR] Salary Outliers and Percentiles [20 Marks]
+
+
+Python
 import pandas as pd
+import numpy as np
+from scipy import stats
 
-data = {
-    "Customer": ["Amit", "Sneha", "Rahul", "Priya", 
-"Neha"],
-    "Salary": [30000, 40000, 50000, 45000, 60000],
-    "Experience": [2, 4, 6, 3, 8]
-}
-df = pd.DataFrame(data)
+salaries = [30, 35, 40, 42, 45, 48, 50, 52, 55, 58, 60, 62, 65, 150, 180]
+df = pd.DataFrame({'Salary': salaries})
 
-print("Original DataFrame:")
-print(df)
 
-df.loc[df["Experience"] < 5, "Salary"] *= 1.115
-df.loc[df["Experience"] >= 5, "Salary"] *= 1.065
+Q1 = df['Salary'].quantile(0.25)
+Q2 = df['Salary'].quantile(0.50)
+Q3 = df['Salary'].quantile(0.75)
+p90 = df['Salary'].quantile(0.90)
 
-print("\nUpdated DataFrame:")
-print(df)
+print(f"Q1: {Q1}, Q2: {Q2}, Q3: {Q3}, 90th Percentile: {p90}")
+
+
+IQR = Q3 - Q1
+lower_bound = Q1 - 1.5 * IQR
+upper_bound = Q3 + 1.5 * IQR
+iqr_outliers = df[(df['Salary'] < lower_bound) | (df['Salary'] > upper_bound)]
+print("\nIQR Outliers:\n", iqr_outliers)
+
+df['Z_Score'] = stats.zscore(df['Salary'])
+z_outliers = df[np.abs(df['Z_Score']) > 2]
+print("\nZ-Score Outliers:\n", z_outliers)
