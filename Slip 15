@@ -1,0 +1,64 @@
+Slip 15
+
+Q1 [A] Subject Marks Charts [10 Marks]
+
+import matplotlib.pyplot as plt
+
+subjects = ['Maths', 'Python', 'DBMS', 'AI', 'IoT']
+marks = [85, 92, 78, 65, 88]
+
+fig, axes = plt.subplots(1, 2, figsize=(12, 5))
+
+
+axes[0].pie(marks, labels=subjects,
+            autopct='%1.1f%%', startangle=90)
+axes[0].set_title('Subject Marks Pie Chart')
+
+
+axes[1].bar(subjects, marks, color='skyblue')
+axes[1].set_title('Subject Marks Bar Chart')
+axes[1].set_ylabel('Marks')
+
+plt.tight_layout()
+plt.show()
+
+
+Q2 [B] Basic Pandas Operations [20 Marks]
+
+import pandas as pd
+
+
+pd.DataFrame({'A': [10, 20, 30, 40, 50]}).to_csv('data.csv', index=False)
+
+df = pd.read_csv('data.csv')
+
+print("DataFrame:\n", df)
+print("\ndescribe():\n", df.describe())
+print("\nhead():\n", df.head(2))
+print("\ntail():\n", df.tail(2))
+print("\nmax():\n", df.max())
+print("\nmin():\n", df.min())
+
+
+
+Q2 [B - OR] Missing Values and Line Plot [20 Marks]
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+data = {
+    'Name': ['A', 'B', 'C', 'D'],
+    'Salary': [50000, None, 70000, 60000],
+    'Age': [25, 30, None, 40]
+}
+df = pd.DataFrame(data)
+
+df['Salary'] = df['Salary'].fillna(df['Salary'].mean())
+df['Age'] = df['Age'].fillna(df['Age'].mean())
+
+plt.plot(df['Name'], df['Salary'], marker='o', color='purple')
+plt.xlabel('Name')
+plt.ylabel('Salary')
+plt.title('Name vs Salary')
+plt.show()
+
