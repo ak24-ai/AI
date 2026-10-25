@@ -1,96 +1,53 @@
+
 Slip 18
 
-Q1)A.Write a python program to check whether a given string is a Palindrome. 
-[10 marks]
+Q1 [A] NumPy Statistics [10 Marks]
 
-Program
+Python
+import numpy as np
 
+arr = np.array([12, 45, 67, 89, 23, 56, 78, 90, 34, 11])
 
-string = input("Enter a string: ")
+print("Sum:", np.sum(arr))
+print("Mean:", np.mean(arr))
+print("Minimum:", np.min(arr))
+print("Maximum:", np.max(arr))
 
-reverse_string = string[::-1]
-
-if string == reverse_string:
-    print("The given string is a Palindrome.")
-else:
-    print("The given string is not a Palindrome.")
-
-
-Q2) B.Write a python program to implement DataFrame operations on 
-employee records, including sorting, filtering and updating records using the 
-Pandas library. [20 marks]
-
-Program
+Q2 [B] Iris Sampling and Statistics [20 Marks]
 
 import pandas as pd
+from sklearn.datasets import load_iris
 
-data = {
-    'Employee_ID': [101, 102, 103, 104, 105],
-    'Employee_Name': ['Amit', 'Sneha', 'Rahul', 
-'Priya', 'Karan'],
-    'Department': ['IT', 'HR', 'IT', 'Finance', 
-'IT'],
-    'Salary': [50000, 45000, 60000, 55000, 48000],
-    'Experience': [2, 3, 5, 4, 1]
-}
+iris = load_iris()
+df = pd.DataFrame(iris.data, columns=iris.feature_names)
+df['class'] = [iris.target_names[i] for i in iris.target]
 
-df = pd.DataFrame(data)
-print("Original Employee Data:")
-print(df)
+sample_df = df.sample(n=20, random_state=42)
+
+print("Min Numeric:\n", df.min(numeric_only=True))
+print("\nMax Numeric:\n", df.max(numeric_only=True))
+print("\nClass Value Counts:\n", df['class'].value_counts())
 
 
-sorted_df = df.sort_values(by='Salary', 
-ascending=False)
-print("\nEmployees Sorted by Salary:")
-print(sorted_df)
+Q2 [B - OR] Euclidean and Manhattan Distance [20 Marks]
 
-filtered_df = df[df['Department'] == 'IT']
-print("\nEmployees from IT Department:")
-print(filtered_df) 
+import pandas as pd
+import numpy as np
 
-less than 3 years
-df.loc[df['Experience'] < 3, 'Salary'] = (
- df.loc[df['Experience'] < 3, 'Salary'] * 1.10
-)
-print("\nEmployee Data After Salary Update:")
-print(df)
+df = pd.DataFrame({
+    'X': [2, 6, 8, 10],
+    'Y': [3, 9, 12, 15]
+})
 
+p1 = df.iloc[0].values
+p2 = df.iloc[1].values
 
-OR
+diff = p2 - p1
+euclidean = np.linalg.norm(diff)
+manhattan = np.sum(np.abs(diff))
 
-Q2) B.Develop a python program to demonstrate the Perception → Decision → 
-Action cycle by simulating an Intelligent Agent in a simple environment. 
-[20 marks]
-
-Program
-
-
-
-environment = ["Dirty", "Clean", "Dirty", "Clean", 
-"Dirty"]
-print("Initial Environment:")
-print(environment)
-print("\nAgent Working:")
-print("----------------")
-
-for i in range(len(environment)):
- 
- print("\nLocation:", i + 1)
- print("Perception:", perception)
- 
- if perception == "Dirty":
-     decision = "Clean the location"
- else:
-     decision = "Move to next location"
- print("Decision:", decision)
-
- if perception == "Dirty":
-      environment[i] = "Clean"
-      action = "Location cleaned"
- else:
-      action = "No cleaning required"
- print("Action:", action)
-print("\nFinal Environment:")
-print(environment)
+print(f"Difference Vector: {diff}")
+print(f"Euclidean Distance: {euclidean:.4f}")
+print(f"Manhattan Distance: {manhattan:.4f}")
 
 
