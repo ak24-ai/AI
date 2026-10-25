@@ -1,83 +1,81 @@
-Slip 12 
+Slip 12
 
-Q1)A.Write a python program to read the car_data.csv dataset and visualize 
-the relationship between Car_Age and Selling_Price using a Scatter Plot. 
-[10 marks]
+Q1 [A] Iris Box Plot Distribution [10 Marks]
 
-Program
+Python
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+from sklearn.datasets import load_iris
 
-import pandas as pd import matplotlib.pyplot as plt
+iris = load_iris()
+df = pd.DataFrame(iris.data, columns=iris.feature_names)
+df['species'] = [iris.target_names[i] for i in iris.target]
 
-df = pd.read_csv("car_data.csv")
+fig, axes = plt.subplots(2, 2, figsize=(10, 8))
+features = iris.feature_names
 
-print("Car Dataset:")
-print(df)
+for i, col in enumerate(features):
+    ax = axes[i // 2, i % 2]
+    sns.boxplot(x='species', y=col, data=df, ax=ax)
+    ax.set_title(f'{col} by Species')
 
-plt.scatter(df['Car_Age'], df['Selling_Price'])
-
-plt.xlabel("Car Age")
-plt.ylabel("Selling Price")
-plt.title("Car Age vs Selling Price")
-
-plt.grid(True)
-
+plt.tight_layout()
 plt.show()
 
 
-Q2)B.Write a python program to implement Tower of Hanoi using recursion. 
-[20 marks]
+Q2 [B] Missing Value Imputation and Encoding [20 Marks]
 
-Program
+Python
+import pandas as pd
+from sklearn.preprocessing import LabelEncoder
 
-
-def tower_of_hanoi(n, source, auxiliary, 
-destination): # Base condition
-  if n == 1:
-       print("Move disk 1 from", source, "to", 
-destination)
-      return
-
- tower_of_hanoi(n - 1, source, destination, 
-auxiliary)
- 
-
- print("Move disk", n, "from", source, "to", 
-destination)
- 
- tower_of_hanoi(n - 1, auxiliary, source, 
-destination)
-
-n = int(input("Enter number of disks: "))
-
-tower_of_hanoi(n, 'A', 'B', 'C')
+data = {
+    'Student_name': ['A', 'B', 'C', 'D'],
+    'City': ['Pune', 'Mumbai', 'Pune', 'Delhi'],
+    'Age': [20, None, 22, 21],
+    'Fees': [50000, 60000, None, 55000],
+    'Admitted': ['Yes', 'No', 'Yes', 'No']
+}
+df = pd.DataFrame(data)
 
 
-OR
-
-Q2) B.Write a python program to simulate a Vacuum Cleaner Agent. The agent 
-should accept the current location and the cleanliness status of the room as 
-input and decide whether to move to another location, clean the room, or 
-remain in the current location. Display the agent’s action based on the given 
-conditions.
-
-Program
+df['Age'] = df['Age'].fillna(df['Age'].mean())
+df['Fees'] = df['Fees'].fillna(df['Fees'].mean())
 
 
-location = input("Enter current location (A/B): 
-").upper()
-status = input("Enter room status (CLEAN/DIRTY): 
-").upper()
-if location not in ["A", "B"]:
-     print("Invalid location.")
-elif status not in ["CLEAN", "DIRTY"]:
-     print("Invalid cleanliness status.")
-else:
-     print("\nCurrent Location :", location)
-     print("Room Status :", status)
-     if status == "DIRTY":
-         action = "Clean the room"
-    elif location == "A" and status == "CLEAN":
-         action = "Move to location B"
-    elif location == "B" and status == "CLEAN
-         action = "Move to location A"
-    print ("Agent Action:", action)
+df = pd.get_dummies(df, columns=['City'])
+
+
+le = LabelEncoder()
+df['Admitted'] = le.fit_transform(df['Admitted'])
+
+print(df)
+
+
+Q2 [B - OR] Plotting with Outliers [20 Marks]
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+np.random.seed(42)
+data = np.random.randint(10, 50, 50)
+
+
+plt.figure(figsize=(8, 4))
+plt.subplot(1, 2, 1)
+plt.boxplot(data)
+plt.title('Original Boxplot')
+
+
+data_with_outliers = np.append(data, [150, -50])
+
+plt.subplot(1, 2, 2)
+plt.boxplot(data_with_outliers)
+plt.title('Boxplot with Outliers')
+
+plt.tight_layout()
+plt.show()
+
+
+
