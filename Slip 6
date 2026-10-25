@@ -1,118 +1,71 @@
 Slip 6
 
-Q1)A.Write a python program to implement Hill Climbing Algorithm . 
-[10 marks]
-
-Program
-
-
-def hill_climbing(values, start):
-    current = start
-    while True:
-       print("Current Position:", current, "Value:", values[current])
-
-       neighbours = []
-       if current > 0:
-           neighbours.append(current - 1)
-       if current < len(values) - 1:
-           neighbours.append(current + 1)
-    
-       best = current
-       for position in neighbours:
-          if values[position] > values[best]:
-             best = position
- 
-       if best == current:
-          break
-      current = best
- print("Local Maximum:", values[current])
- print("Position:", current)
-
-values = [2, 5, 8, 12, 15, 11, 7, 4]
-print("Hill Climbing Algorithm")
-print("Values:", values)
-start = int(input("Enter starting position (0-7): "))
-hill_climbing(values, start)
-
-
-Q2) B.Write a python program to plot a scatter plot of petal length vs petal 
-width for the Iris dataset. Label the axes and add a title. 
-[20 marks]
-
-Program 
+Q1 [A] Student DataFrame Head [10 Marks]
 
 import pandas as pd
-import matplotlib.pyplot as plt
-from sklearn.datasets import load_iris
 
-iris = load_iris()
+students = {
+    'Name': ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'],
+    'Age': [20, 21, 19, 22, 20, 21, 23, 20],
+    'Course': ['BCA'] * 8,
+    'Marks': [85, 78, 92, 66, 74, 88, 91, 82]
+}
 
-df = pd.DataFrame(iris.data, 
-columns=iris.feature_names)
-
-plt.scatter(
-    df['petal length (cm)'],
-    df['petal width (cm)']
-)
-
-plt.xlabel("Petal Length (cm)")
-plt.ylabel("Petal Width (cm)")
-plt.title("Petal Length vs Petal Width - Iris 
-Dataset")
-
-plt.show()
+df = pd.DataFrame(students)
+print(df.head(5)) 
 
 
-OR
+Q2 [B] DataFrame Exploration & Modification [20 Marks]
 
-Q2) B.Write a python program to implement the Alpha–Beta pruning with 
-depth limit and heuristic. [20 marks]
+Python
+import pandas as pd
+import numpy as np
 
-Program
 
-def alpha_beta(depth, node, alpha, beta, 
-maximizing_player): # Depth limit reached
-   if depth == 3:
-        return heuristic[node]
-   if maximizing_player:
-       best = -999
-       for i in range(2):
-           value = alpha_beta(
-               depth + 1,
-               node * 2 + i,
-               alpha,
-               beta,
-               False
-          )
-          best = max(best, value)
-          alpha = max(alpha, best)
+data = {
+    'emp_name': [f'Emp_{i}' for i in range(1, 11)],
+    'age': np.random.randint(25, 50, 10),
+    'salary': np.random.randint(30000, 80000, 10)
+}
+df = pd.DataFrame(data)
+
+
+print("Shape:", df.shape)
+print("\nDescription:\n", df.describe())
+
+
+extra_rows = pd.DataFrame({
+    'emp_name': ['Emp_1', 'Emp_2', None, 'Emp_11', 'Emp_12'],
+    'age': [df['age'].iloc[0], None, 30, 40, 45],
+    'salary': [df['salary'].iloc[0], 50000, None, 60000, 70000]
+})
+
+df = pd.concat([df, extra_rows], ignore_index=True)
+df['Department'] = np.nan
+
+print("\nUpdated DataFrame:")
+print(df)
+
+
+Q2 [B - OR] Student Exploration [20 Marks]
+
+Python
+import pandas as pd
+
+raw_data = {
+    'Name': ['Smaran', 'Sachin', 'Samarpan', 'Spandan', 'Shaman'],
+    'Address': ['Pune', 'Mumbai', 'Delhi', 'Chennai', 'Madurai'],
+    'Age': [20, 23, 19, 21, 22],
+    'Class': ['ME', 'MSc (CA)', 'MVOC', 'MCom', 'MSc']
+}
+pd.DataFrame(raw_data).to_csv('StudentData.csv', index=False)
+
+df = pd.read_csv('StudentData.csv')
+
+print("a) Statistical Description:\n", df.describe(include='all'))
+print("\nb) Shape of dataset:", df.shape)
+print("\nc) First two rows:\n", df.head(2))
+
+
+
  
-          if beta <= alpha:
-              print("Beta Pruning at node:", node)
-              break
-      return best
- else:
-     best = 999
-     for i in range(2):
-         value = alpha_beta(
-             depth + 1,
-             node * 2 + i,
-             alpha,
-             beta,
-             True
- )
-         best = min(best, value)
-         beta = min(beta, best)
- 
-          if beta <= alpha:
-              print("Alpha Pruning at node:", node) 
-              break
-         return best
-
-heuristic = [3, 5, 6, 9, 1, 2, 0, -1]
-alpha = -999
-beta = 999
-print("Alpha-Beta Pruning")
-print("Heuristic Values:", heuristic)
-result = alpha_beta(0, 0, alpha, beta, True)
-print("Optimal Value:", result
