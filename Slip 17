@@ -1,107 +1,51 @@
 Slip 17
 
-Q1)A.Write a Python Program to Split the Iris dataset into training and testing 
-sets (80-20) and print the shapes of X_train and X_test. 
-[10 marks]
+Q1 [A] NumPy Employee Age Statistics [10 Marks]
 
-Program
+Python
+import numpy as np
+
+ages = np.array([23, 45, 31, 35, 29, 52, 40, 26, 38, 48])
+
+print("Minimum Age:", np.min(ages))
+print("Maximum Age:", np.max(ages))
+print("Average Age:", np.mean(ages))
+
+Q2 [B] Read UCI CSV Dataset [20 Marks]
 
 import pandas as pd
-from sklearn.datasets import load_iris
-from sklearn.model_selection import train_test_split
 
-iris = load_iris()
+url = "https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data"
+cols = ['sepal_length', 'sepal_width', 'petal_length', 'petal_width', 'class']
+df = pd.read_csv(url, names=cols)
 
-df = pd.DataFrame(iris.data, 
-columns=iris.feature_names)
-
-X = df
-y = iris.target
-
-X_train, X_test, y_train, y_test = train_test_split(
- X, y, test_size=0.20, random_state=42
-)
-
-print("Shape of X_train:", X_train.shape)
-print("Shape of X_test :", X_test.shape)
+print("Description:\n", df.describe())
+print("\nNumeric Means:\n", df.mean(numeric_only=True))
+print("\nMissing Values Count:\n", df.isnull().sum())
 
 
-Q2)B.Write a python program to implement a Model-Based Agent for Smart 
-Traffic Signal Control by maintaining previous and current traffic density before 
-deciding the signal status. [20 marks]
 
-Program
+Q2 [B - OR] Sampling Methods [20 Marks]
 
-
-previous_density = input(
-     "Enter previous traffic density 
-(LOW/MEDIUM/HIGH): "
-).upper()
-current_density = input(
-    "Enter current traffic density (LOW/MEDIUM/HIGH): 
-"
-).upper()
-
-valid_density = ["LOW", "MEDIUM", "HIGH"]
-
-if previous_density not in valid_density or
-current_density not in valid_density:
-     print("Error: Enter density as LOW, MEDIUM or 
-HIGH.")
-else:
-    print("\nPrevious Traffic Density :", 
-previous_density)
-    print("Current Traffic Density :", 
-current_density)
- 
- if current_density == "HIGH":
-     signal = "GREEN - Allow traffic to move"
- elif current_density == "MEDIUM": 
-      signal = "GREEN for limited time"
- else:
-     signal = "RED - Stop traffic"
-
- if previous_density != current_density:
-      print("Traffic Density Changed : Yes")
- else:
-      print("Traffic Density Changed : No")
- print("Signal Status :", signal)
-
-
-OR
-
-Q2)B.Write a python program to perform Linear Regression using a suitable 
-dataset and predict the output for user-defined input values. 
-[20 marks]
-
-Program
-
-Here, Hours_Studied is used as the input feature and Marks as the target.
 import pandas as pd
-from sklearn.linear_model import LinearRegression
 
-data = {
-    'Hours_Studied': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-    'Marks': [35, 40, 45, 50, 55, 60, 65, 70, 80, 85]
-}
-df = pd.DataFrame(data)
-print("Student Dataset:")
-print(df)
+df = pd.DataFrame({
+    'Employee_ID': range(1, 13),
+    'Department': ['HR', 'IT', 'Finance', 'HR', 'IT', 'Finance', 'HR', 'IT', 'Finance', 'HR', 'IT', 'Finance'],
+    'Age': [25, 30, 35, 40, 28, 32, 45, 29, 34, 38, 42, 27],
+    'Salary': [50, 60, 70, 80, 55, 65, 75, 85, 58, 68, 78, 88]
+})
 
-X = df[['Hours_Studied']]
-y = df['Marks']
 
-model = LinearRegression()
+srs = df.sample(n=5, random_state=42)
 
-model.fit(X, y)
 
-hours = float(input("\nEnter number of hours studied: 
-"))
+sys_sample = df.iloc[::3]
 
-new_data = pd.DataFrame(
- [[hours]],
- columns=['Hours_Studied']
-)
 
-prediction = model.predict(new_data)
-print("Predicted Marks:", prediction[0])
+strat_sample = df.groupby('Department', group_keys=False).apply(lambda x: x.sample(1))
+
+print("Random Sampling:\n", srs)
+print("\nSystematic Sampling:\n", sys_sample)
+print("\nStratified Sampling:\n", strat_sample)
+
