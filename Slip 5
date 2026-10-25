@@ -1,119 +1,55 @@
 Slip 5
 
-Q1)A.Write a python program to simulate the Monkey Banana Problem. 
-Initialize the monkey's position, perform the necessary actions to reach the 
-banana, and use conditional statements to determine whether the goal state 
-has been achieved. [10 marks]
+Q1 [A] Laptops DataFrame [10 Marks]
 
-Program
-
-
-
-monkey_position = "door"
-box_position = "window"
-banana_position = "ceiling"
-print("Initial State:")
-print("Monkey Position :", monkey_position)
-print("Box Position :", box_position)
-print("Banana Position :", banana_position)
-
-if monkey_position != box_position:
-   print("\nMonkey moves from", monkey_position, "to", box_position)
-   monkey_position = box_position
-
-if monkey_position == box_position:
-   print("Monkey pushes the box under the banana")
-   box_position = banana_position
-
-if monkey_position == box_position:
-   print("Monkey climbs on the box")
-   monkey_position = "on_box"
-
-if monkey_position == "on_box" and box_position ==banana_position:
-   print("Monkey takes the banana")
-   banana_obtained = True
-else:
-    banana_obtained = False
-
-if banana_obtained:
-   print("\nGoal State Achieved!")
-   print("Monkey has obtained the banana.")
-else:
-   print("\nGoal State Not Achieved.")
-
-
-Q2)B.Apply Linear Regression on a YouTube Video dataset to predict video 
-views using relevant video attributes. Visualize the relationship between the 
-predictor and target variable using a scatter plot and regression line. 
-[20 marks]
-
-Program
-
-
+Python
 import pandas as pd
-import matplotlib.pyplot as plt
-from sklearn.linear_model import LinearRegression
 
-data = {
-    'Likes': [100, 250, 400, 550, 700, 900, 1100, 1300, 1500, 1800],
-    'Views': [2000, 4500, 7000, 9500, 12000, 15000, 19000, 22000, 25000, 30000]
+laptop_data = {
+    'Laptop_Model': ['MacBook Pro', 'Dell XPS', 'Lenovo ThinkPad', 'HP Spectre', 'Asus ROG'],
+    'Cost': [150000, 120000, 95000, 110000, 130000]
 }
-df = pd.DataFrame(data)
-print("YouTube Video Dataset:")
+
+df = pd.DataFrame(laptop_data)
 print(df)
 
-X = df[['Likes']]
 
-Y = df['Views']
 
-model = LinearRegression()
+Q2 [B] Pie Chart & Bar Chart [20 Marks]
 
-model.fit(X, Y)
+import matplotlib.pyplot as plt
+names = ['Alice', 'Bob', 'Charlie', 'David', 'Eva']
+percentages = [85, 92, 78, 65, 88]
+fig, axes = plt.subplots(1, 2, figsize=(12, 5))
 
-likes = float(input("\nEnter number of likes: "))
-prediction = model.predict([[likes]]) print("Predicted Views:", prediction[0])
 
-plt.scatter(df['Likes'], df['Views'], label="Actual 
-Data")
+axes[0].pie(percentages, labels=names, autopct='%1.1f%%', startangle=90)
+axes[0].set_title('Student Percentages (Pie Chart)')
 
-plt.plot(
-    df['Likes'],
-    model.predict(X),
-    label="Regression Line"
-)
-plt.xlabel("Number of Likes")
-plt.ylabel("Number of Views")
-plt.title("YouTube Likes vs Views")
 
-plt.legend()
+axes[1].bar(names, percentages, color='skyblue')
+axes[1].set_title('Student Percentages (Bar Chart)')
+axes[1].set_ylabel('Percentage')
 
+plt.tight_layout()
 plt.show()
 
+Q2 [B - OR] Range, Variance, Standard Deviation [20 Marks]
 
-OR 
+Python
+import pandas as pd
 
-Q2) B.Write a pyhton program to create a simple chatbot using predefined 
-rules to respond to user inputs. 
-[20 marks]
+sales = [12.5, 14.0, 15.2, 11.8, 16.5, 18.0, 17.2, 19.1, 15.0, 13.4, 16.8, 20.1]
+sales_series = pd.Series(sales)
 
-Program
+sales_range = sales_series.max() - sales_series.min()
+variance = sales_series.var()
+std_dev = sales_series.std()
 
-print("Simple Chatbot")
-print("Type 'bye' to exit the chatbot.")
-while True:
-    user_input = input("You: ").lower()
-    if user_input == "hello" or user_input == "hi":
-        print("Bot: Hello! How can I help you?")
-    elif user_input == "how are you":
-        print("Bot: I am fine. Thank you!")
-    elif user_input == "what is your name":
-        print("Bot: My name is SimpleBot.")
-    elif user_input == "what can you do":
-        print("Bot: I can answer simple predefined questions.")
-    elif user_input == "thank you" or user_input =="thanks":
-        print("Bot: You are welcome!")
-   elif user_input == "bye":
-        print("Bot: Goodbye! Have a nice day.")
-        break
-   else:
-       print("Bot: Sorry, I don't understand that.")
+print(f"Range: {sales_range:.2f} Lakh")
+print(f"Variance: {variance:.2f}")
+print(f"Standard Deviation: {std_dev:.2f}")
+
+
+
+ 
