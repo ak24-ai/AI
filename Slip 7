@@ -1,104 +1,60 @@
 Slip 7
 
-Q1) A.Write a python program to create a DataFrame containing Employee 
-Name, Department and Salary. Display the employees who satisfy all the 
-following conditions: Department = ‘IT’, Salary > 50000, and Employee Name 
-contains the letter ‘a’. [10 marks]
+Q1 [A] CSV Reading [10 Marks]
 
-Program: 
+Python
+import pandas as pd
+
+staff_data = {
+    'staff_id': [101, 102, 103, 104, 105],
+    'employee_name': ['John', 'Jane', 'Alex', 'Emily', 'Chris'],
+    'department': ['HR', 'IT', 'Finance', 'IT', 'Marketing'],
+    'monthly_salary': [45000, 65000, 55000, 60000, 50000]
+}
+pd.DataFrame(staff_data).to_csv('staff.csv', index=False)
+
+df = pd.read_csv('staff.csv')
+print(df)
+
+
+Q2 [B] Histogram Custom Bins [20 Marks]
+
+Python
+import numpy as np
+import matplotlib.pyplot as plt
+
+np.random.seed(42)
+ages = np.random.randint(22, 60, 15)
+
+custom_bins = [20, 30, 40, 50, 60]
+
+
+counts, bin_edges = np.histogram(ages, bins=custom_bins)
+for i in range(len(counts)):
+    print(f"Bin {bin_edges[i]}-{bin_edges[i+1]}: {counts[i]} employees")
+
+
+plt.hist(ages, bins=custom_bins, edgecolor='black', color='orange')
+plt.xlabel('Age Range')
+plt.ylabel('Frequency')
+plt.title('Employee Age Distribution')
+plt.show()
+
+
+Q2 [B - OR] Mean, Median, Mode [20 Marks]
 
 import pandas as pd
 
-data = {
-    'Employee Name': ['Rahul', 'Amit', 'Sneha', 'Karan', 'Priya', 'Rohan'], 
-    'Department': ['IT', 'HR', 'IT', 'IT', 'Finance', 'IT'],
-    'Salary': [60000, 55000, 48000, 75000, 65000, 52000]
+student_data = {
+    'Roll No': [1, 2, 3, 4, 5],
+    'Name': ['A', 'B', 'C', 'D', 'E'],
+    'Percentage': [85.5, 90.0, 85.5, 78.0, 92.5]
 }
-df = pd.DataFrame(data)
-print("Employee Data:")
-print(df)
+df = pd.DataFrame(student_data)
 
-result = df[
-     (df['Department'] == 'IT') &
-     (df['Salary'] > 50000) &
-     (df['Employee Name'].str.contains('a', 
-case=False))
-]
-print("\nEmployees satisfying all conditions:")
-print(result)
-
-Q2) B.Write a python program to simulate a Model-Based Agent for Smart 
-Home Security. A smart home security system monitors the main door. The agent should use 
-both the previous door status and the current door status to decide the 
-appropriate security action. The door can have two states: OPEN / CLOSED
-The program should accept the previous and current door status from the user 
-and display the appropriate action. Display an error message if the user enters 
-any value other than OPEN or CLOSED.
-
-Program
-
-previous_status = input("Enter previous door status 
-(OPEN/CLOSED): ").upper()
-current_status = input("Enter current door status 
-(OPEN/CLOSED): ").upper()
-
-if previous_status not in ["OPEN", "CLOSED"] or
-current_status not in ["OPEN", "CLOSED"]:
-    print("Error: Invalid door status. Enter only 
-OPEN or CLOSED.")
-else:
-    print("\nPrevious Door Status:", previous_status)
-    print("Current Door Status :", current_status)
- 
-    if previous_status == "CLOSED" and current_status== "OPEN":
-       action = "Door opened. Trigger security alert!"
-    elif previous_status == "OPEN" and current_status
-== "CLOSED":
-        action = "Door closed. Security status 
-normal."
-    elif previous_status == "OPEN" and current_status
-== "OPEN":
-        action = "Door remains open. Continue 
-monitoring." 
-    else:
-        action = "Door remains closed. Security status normal."
-    print("Security Action :", action)
+print(f"Mean Percentage: {df['Percentage'].mean():.2f}")
+print(f"Median Percentage: {df['Percentage'].median()}")
+print(f"Mode Percentage: {df['Percentage'].mode()[0]}")
 
 
 
-OR
-
-Q2) B.Write a python program to implement Breadth First Search (BFS) for 
-graph traversal. Display the traversal order starting from a given source vertex.
-
-Program
-
-from collections import deque
-
-graph = {
-    'A': ['B', 'C'],
-    'B': ['D', 'E'],
-    'C': ['F'],
-    'D': [],
-    'E': ['F'],
-    'F': []
-}
-def bfs(graph, start):
-    visited = set()
-    queue = deque()
-    visited.add(start)
-    queue.append(start)
-    print("BFS Traversal:", end=" ")
-    while queue:
-        vertex = queue.popleft()
-        print(vertex, end=" ")
-        for neighbour in graph[vertex]:
-            if neighbour not in visited:
-                visited.add(neighbour)
-                queue.append(neighbour)
-
-source = input("Enter source vertex (A-F): ").upper()
-if source in graph:
-    bfs(graph, source)
-else:
-    print("Invalid source vertex.")
