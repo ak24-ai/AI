@@ -1,137 +1,74 @@
 Slip 9
 
-Q1) A.Write a program to create a DataFrame which contains a person name 
-and age ,Sort a DataFrame in ascending order of Age 
-[10 marks] 
+Q1 [A] Iris Frequency [10 Marks]
 
-Program
-
+Python
 import pandas as pd
 
-data = {
-    'Person Name': ['Rahul', 'Sneha', 'Amit', 'Priya', 'Karan'],
-    'Age': [25, 20, 30, 22, 27]
-}
-df = pd.DataFrame(data)
-print("Original DataFrame:")
-print(df)
+# Load or generate dummy iris dataset if file missing
+try:
+    df = pd.read_csv('iris.csv')
+except FileNotFoundError:
+    from sklearn.datasets import load_iris
+    iris = load_iris()
+    df = pd.DataFrame(iris.data, columns=iris.feature_names)
+    df['species'] = [iris.target_names[i] for i in iris.target]
 
-sorted_df = df.sort_values(by='Age', ascending=True)
-print("\nDataFrame Sorted by Age:")
-print(sorted_df)
-
-
-Q2)B.Write a program to implement the Blocks World Problem. Represent the 
-initial and goal states of a set of blocks, perform valid block movements according to the problem constraints and display each intermediate state until 
-the goal configuration is achieved. [20 marks]
-
-Program
+print(df['species'].value_counts())
 
 
-def display_state(state):
-    print("State:")
-    for block, position in state.items():
-        print(block, "->", position)
-    print()
+Q2 [B] 50 Integer Visualization [20 Marks]
 
-initial_state = {
-    'A': 'Table',
-    'B': 'A',
-    'C': 'Table'
-}
+import numpy as np
+import matplotlib.pyplot as plt
 
-goal_state = {
-    'A': 'Table',
-    'B': 'C',
-    'C': 'Table'
-}
-print("Initial State:")
-display_state(initial_state)
+np.random.seed(42)
+data = np.random.randint(1, 100, 50)
 
-print("Move 1: Move B from A to Table")
-initial_state['B'] = 'Table'
-display_state(initial_state)
+fig, axes = plt.subplots(2, 2, figsize=(10, 8))
 
-print("Move 2: Move B from Table to C")
-initial_state['B'] = 'C'
-display_state(initial_state)
+axes[0, 0].plot(data, color='purple')
+axes[0, 0].set_title('Line Chart')
 
-if initial_state == goal_state: 
-    print("Goal State Achieved!")
-else:
-     print("Goal State Not Achieved.")
+axes[0, 1].scatter(range(len(data)), data, color='coral')
+axes[0, 1].set_title('Scatter Plot')
+
+axes[1, 0].hist(data, color='teal', edgecolor='black')
+axes[1, 0].set_title('Histogram')
+
+axes[1, 1].boxplot(data)
+axes[1, 1].set_title('Box Plot')
+
+plt.tight_layout()
+plt.show()
 
 
-OR
+Q2 [B - OR] Complete Descriptive Statistics [20 Marks]
 
-Q2) B.Write a python program to compare BFS and DFS performance for graph 
-search problems.
-[20 marks]
+Python
+import pandas as pd
+import numpy as np
 
-Program
 
-from collections import deque
-import time
+pd.DataFrame({'Salary': [30, 45, 50, 60, 70, 80, 90, 100]}).to_csv('employee.csv', index=False)
 
-graph = {
-     'A': ['B', 'C'],
-     'B': ['D', 'E'],
-     'C': ['F', 'G'],
-     'D': ['H'], 'E': [],
-     'F': [],
-     'G': ['I'],
-     'H': [],
-     'I': []
+df = pd.read_csv('employee.csv')
+salary = df['Salary']
+
+stats_data = {
+    'Mean': salary.mean(),
+    'Median': salary.median(),
+    'Variance': salary.var(),
+    'Std Dev': salary.std(),
+    'Min': salary.min(),
+    'Max': salary.max(),
+    'Q1 (25%)': salary.quantile(0.25),
+    'Q2 (50%)': salary.quantile(0.50),
+    'Q3 (75%)': salary.quantile(0.75),
+    'Count': salary.count()
 }
 
-def bfs(graph, start):
-    visited = set()
-    queue = deque([start])
-    order = []
-    while queue:
-        vertex = queue.popleft()
-        if vertex not in visited:
-            visited.add(vertex)
-            order.append(vertex)
-            for neighbour in graph[vertex]:
-                if neighbour not in visited:
-                queue.append(neighbour)
- return order
+for k, v in stats_data.items():
+    print(f"{k}: {v}")
 
-def dfs(graph, start):
-    visited = set()
-    stack = [start]
-    order = []
- while stack:
-     vertex = stack.pop()
-     if vertex not in visited:
-        visited.add(vertex)
-        order.append(vertex)
- 
-         for neighbour in reversed(graph[vertex]): if neighbour not in visited:
- stack.append(neighbour)
-   return order
-source = input("Enter source vertex (A-I): ").upper()
-if source not in graph:
-    print("Invalid source vertex.")
-else:
- 
-    start_time = time.perf_counter()
-    bfs_result = bfs(graph, source)
-    bfs_time = time.perf_counter() - start_time
- 
-    start_time = time.perf_counter()
-    dfs_result = dfs(graph, source)
-    dfs_time = time.perf_counter() - start_time
-    print("\nBFS Traversal:", " -> 
-".join(bfs_result))
-    print("BFS Time:", format(bfs_time, ".8f"), 
-"seconds")
-    print("\nDFS Traversal:", " -> 
-".join(dfs_result))
-    print("DFS Time:", format(dfs_time, ".8f"), 
-"seconds")
-    print("\nPerformance Comparison")
-    print("----------------------")
-    print("BFS Visited Nodes:", len(bfs_result))
-    print("DFS Visited Nodes:", len(dfs_result))
+
