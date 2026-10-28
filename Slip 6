@@ -60,8 +60,8 @@ length_valid = len(password) >= 8
 
 digit_valid = any(char.isdigit() for char in password)
 
-special_valid = any(char in string.punctuation for char in
-password)
+special_valid = any(char in string.punctuation for char in password)
+
 print("\n----- Password Strength Report -----")
 print("Length >= 8:", length_valid)
 print("Contains digit:", digit_valid)
@@ -73,10 +73,9 @@ else:
     print("\nPassword Strength: WEAK")
 if not length_valid:
     print("- Password must contain at least 8 characters.")
- if not digit_valid:
+if not digit_valid:
     print("- Password must contain at least one digit.")
- if not special_valid: print("- Password must contain at least one special
-character.")
+if not special_valid: print("- Password must contain at least one special character.")
 
 
 
