@@ -54,27 +54,35 @@ unusually large number of requests to load pages.
 
 Q2) B Write a Python program using Scapy to detect a possible DoS attack by
 counting packets received from each IP address and generating an alert when
-traffic exceeds a threshold
+traffic exceeds a threshold monitoring network traffic.
 
-
-monitoring network traffic.
 from scapy.all import sniff
 import time
+
 start = time.time()
 count = 0 
+
 def detect(packet):
-   global start, count
-   count += 1
-  if time.time() - start >= 1:
-     print("Packets per second:", count)
-if count > 100:
-     print(“Possible DoS/DDoS Attack")
-else:
-     print("Normal Traffic")
-count = 0
-start = time.time()
+    global start, count
+    count += 1
+
+    if time.time() - start >= 1:
+        print("Packets per second:", count)
+
+        if count > 100:
+            print("Possible DoS/DDoS Attack")
+        else:
+            print("Normal Traffic")
+
+        count = 0
+        start = time.time()
+
 print("Monitoring network traffic...")
-sniff(prn=detect, store=False)
+try:
+   sniff(prn=detect, store=False)
+except keyboardInterrupt:
+   print ("\nMonitoring stopped.")
+
 
 
 OR Q.2 B Write a Python program to implement Caesar Cipher for both
