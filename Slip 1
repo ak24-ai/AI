@@ -75,11 +75,11 @@ def dictionary_attack(target):
  for pwd in passwords:
      attempts += 1
      print("Attempt", attempts, ":", pwd)
-    if pwd == target:
+ if pwd == target:
        print("Password matched!")
        print("Total attempts:", attempts)
        return
  print("Password not found in dictionary.")
  print("Total attempts:", attempts)
- target = input("Enter target password: ")
+target = input("Enter target password: ")
 dictionary_attack(target)
