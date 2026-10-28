@@ -1,0 +1,96 @@
+Q1) A) What is Phishing? Explain the step-by-step
+algorithm to identify phishing emails.
+
+1. Definition of Phishing
+Phishing is a type of cyberattack in which an attacker sends fake emails or
+messages pretending to be a trusted organization, such as a bank, to steal
+sensitive information like passwords, bank details, OTPs, and credit card
+numbers.
+Example: An attacker sends an email saying, “Your bank account will be blocked.
+Click here to update your account details.” The link opens a fake banking website
+that steals the user's information.
+
+2. Step-by-step algorithm to identify phishing emails
+Algorithm: Identify_Phishing_Email
+
+Step 1: Start.
+Step 2: Receive the email from the sender.
+Step 3: Check the sender's email address. If the address is suspicious or
+different from the official address, mark it as suspicious.
+Step 4: Check the subject line. If it contains urgent or threatening words such as
+“Account Blocked,” “Urgent Action,” or “Verify Now,” increase suspicion.
+Step 5: Check the email content for spelling mistakes, grammatical errors, and
+requests for passwords, OTPs, or banking details.
+Step 6: Check the links in the email. If a link leads to an unknown or suspicious
+website, mark the email as suspicious. Do not click the link. Step 7: Check attachments. If an unexpected attachment is received, especially
+an executable file, do not open it.
+Step 8: If multiple suspicious signs are found, classify the email as a phishing
+email. Otherwise, classify it as not identified as phishing and continue to exercise
+caution.
+Step 9: Report the suspicious email to the email service provider or IT
+administrator.
+Step 10: Stop.
+
+
+Q2) B Write a simple Python program to hide a text message inside an
+image and display the hidden message again.
+
+from PIL import Image
+import stepic
+
+def hide_data():
+ 
+    image_name = input("Enter the original image name: ")
+ 
+    img = Image.open(image_name) 
+    secret_msg = input("Enter the secret message: ")
+ 
+    data = secret_msg.encode("utf-8")
+ 
+    stego_img = stepic.encode(img, data)
+ 
+    output_name = input("Enter name for stego image (use .png):")
+ 
+   stego_img.save(output_name, format="PNG")
+   print("Message successfully hidden!")
+   print("Stego image:", output_name)
+
+def retrieve_data():
+ 
+  image_name = input("Enter the stego image name: ")
+ 
+  stego_img = Image.open(image_name)
+ 
+  decoded_data = stepic.decode(stego_img)
+ 
+  print("Retrieved Message:", decoded_data.decode("utf-8"))
+
+hide_data()
+retrieve_data()
+
+
+Q2) B Write a Python program to simulate a phishing login page for
+educational purposes..
+
+print("================================")
+print(" LOGIN PAGE")
+print(" EDUCATIONAL SIMULATION")
+print("================================")
+
+correct_username = "student"
+correct_password = "12345"
+
+username = input("Enter Username: ")
+password = input("Enter Password: ")
+
+if username == correct_username and password ==
+correct_password:
+print("\nLogin Successful!")
+print("This is only a simulation.")
+else:
+print("\nLogin Failed!")
+print("Invalid Username or Password.")
+
+print("\n--- Security Awareness ---")
+print("Do not enter your password on unknown websites.")
+print("Always check the
