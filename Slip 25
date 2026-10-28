@@ -83,14 +83,13 @@ correct_password = "12345"
 username = input("Enter Username: ")
 password = input("Enter Password: ")
 
-if username == correct_username and password ==
-correct_password:
-print("\nLogin Successful!")
-print("This is only a simulation.")
+if username == correct_username and password == correct_password:
+    print("\nLogin Successful!")
+    print("This is only a simulation.")
 else:
-print("\nLogin Failed!")
-print("Invalid Username or Password.")
+    print("\nLogin Failed!")
+   print("Invalid Username or Password.")
 
 print("\n--- Security Awareness ---")
 print("Do not enter your password on unknown websites.")
-print("Always check the
+print("Always check the website URL b
