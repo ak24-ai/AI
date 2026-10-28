@@ -55,7 +55,7 @@ import stepic
 
 def hide_data():
  
-   image_name = input("Enter the original image name: ") # Open image
+   image_name = input("Enter the original image name: ") 
    img = Image.open(image_name)
  
    secret_msg = input("Enter the secret message: ")
