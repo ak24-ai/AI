@@ -1,0 +1,94 @@
+Slip 07
+
+Q1) A Define Denial of Service (DoS) attack and explain its working principles along
+with SYN flood and HTTP flood attack types
+
+1. Definition of DoS Attack
+A Denial of Service (DoS) attack is a cyberattack in which an attacker sends a large
+number of requests or unwanted traffic to a server or network to make its services
+unavailable to legitimate users.
+
+2. Working Principle of DoS Attack
+1. The attacker targets a server or website.
+2. The attacker sends a large number of requests to the target.
+3. The server's resources, such as memory, CPU, or connection capacity, become
+overloaded.
+4. The server becomes slow or stops responding.
+5. Genuine users cannot access the service.
+
+3. Types of DoS Attacks
+
+A. SYN Flood Attack
+A SYN flood is a type of DoS attack that misuses the TCP connection establishment
+process.
+Working:
+1. The attacker sends many TCP SYN requests to the server.
+2. The server responds with SYN-ACK messages.
+3. The attacker does not complete the TCP handshake by sending the final ACK.
+4. The server keeps waiting for these connections to complete.
+5. The server's connection queue fills up, preventing genuine users from
+connecting.
+
+Example: A website cannot accept new connections because its connection queue is
+filled with incomplete TCP connections.
+
+B. HTTP Flood Attack
+An HTTP flood is a type of DoS attack in which an attacker sends a large number of
+HTTP requests to a web server. 
+Working:
+1. The attacker sends repeated HTTP requests to a website.
+2. The server attempts to process each request.
+3. The server uses excessive CPU, memory, or processing capacity.
+4. The website becomes slow or unavailable.
+5. Genuine users experience delays or cannot access the website.
+Example: An online shopping website becomes unavailable because it receives an
+unusually large number of requests to load pages.
+
+4. Prevention of DoS Attacks
+1. Use firewalls to filter suspicious traffic.
+2. Apply rate limiting to restrict excessive requests.
+3. Use IDS/IPS tools to detect malicious traffic.
+4. Use SYN flood protection and connection timeouts.
+5. Use a Web Application Firewall (WAF) to help filter HTTP floods.
+
+
+Q2) B Write a Python program using Scapy to detect a possible DoS attack by
+counting packets received from each IP address and generating an alert when
+traffic exceeds a threshold
+
+
+monitoring network traffic.
+from scapy.all import sniff
+import time
+start = time.time()
+count = 0 
+def detect(packet):
+   global start, count
+   count += 1
+  if time.time() - start >= 1:
+     print("Packets per second:", count)
+if count > 100:
+     print(“Possible DoS/DDoS Attack")
+else:
+     print("Normal Traffic")
+count = 0
+start = time.time()
+print("Monitoring network traffic...")
+sniff(prn=detect, store=False)
+
+
+OR Q.2 B Write a Python program to implement Caesar Cipher for both
+encryption and decryption of a given text
+
+text = input("Enter text: ")
+key = int(input("Enter key: "))
+
+enc = ""
+for ch in text:
+    enc = enc + chr((ord(ch) - 65 + key) % 26 + 65)
+print("Encrypted text:", enc)
+
+dec = "" 
+for ch in enc:
+    dec = dec + chr((ord(ch) - 65 - key) % 26 + 65)
+print("Decrypted text:", dec)
