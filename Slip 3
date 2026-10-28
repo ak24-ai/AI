@@ -68,7 +68,7 @@ for ch in text:
     if ch.isalpha():
        if ch.isupper():
           result += chr((ord(ch) - ord('A') + 2) % 26 +ord('A'))
-    else:
+       else:
           result += chr((ord(ch) - ord('a') + 2) % 26 +ord('a'))
     else:
           result += ch
@@ -89,20 +89,20 @@ print("================================")
 print(" LOGIN PAGE")
 print(" EDUCATIONAL SIMULATION")
 print("================================")
-
+correct_username = "student"
 correct_password = "12345"
 
 username = input("Enter Username: ")
 password = input("Enter Password: ")
 
-if username == correct_username and password ==
-correct_password:
-print("\nLogin Successful!")
-print("This is only a simulation.")
+if username == correct_username and password ==correct_password:
+
+    print("\nLogin Successful!")
+    print("This is only a simulation.")
 else:
-print("\nLogin Failed!")
-print("Invalid Username or Password.")
+    print("\nLogin Failed!")
+    print("Invalid Username or Password.")
 
 print("\n--- Security Awareness ---")
 print("Do not enter your password on unknown websites.")
-print("Always check the website address
+print("Always check the website address.")
