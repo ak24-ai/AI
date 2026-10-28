@@ -1,4 +1,92 @@
 Slip 02
+Q1) A Differentiate between virus, worm, and Trojan horse. 
+
+1.Virus.          
+• Malware that attaches
+to a file or program.
+
+•Requires a host file or
+program.
+
+•Replicates by infecting
+other files.
+
+•Through infected files,
+USB drives, or
+downloads.
+
+•Often requires
+execution of an
+infected file.
+
+•Infect files and
+potentially damage
+data.
+
+example
+File-infecting virus
+
+
+2.Worm
+
+•Malware that replicates
+and spreads
+independently.
+
+•Does not require a host
+file.
+
+•Replicates
+automatically.
+
+•Through networks and
+vulnerable systems.
+
+•Can spread without
+direct user action.
+
+•Spread rapidly and
+disrupt systems or
+networks.
+
+Example 
+Conficker worm
+
+
+3.Trojan Horse
+
+•Malware disguised as
+legitimate software.
+
+• Usually exists as a
+standalone program.
+
+• Does not usually
+self-replicate.
+
+• Through deceptive
+downloads, attachments,
+or applications.
+
+• Usually requires the user
+to install or run it.
+
+• Trick users and perform
+malicious activities.
+
+•Example
+Fake antivirus containing
+malware
+
+6. Prevention Methods
+
+1. Install and regularly update antivirus software.
+2. Keep the operating system and applications updated.
+3. Avoid opening suspicious email attachments or links.
+4. Download software only from trusted sources.
+5. Use a firewall and perform regular data backups.
+
+
 
 Q. 2 B Write a Python program to detect spam emails using predefined keywords.
 
