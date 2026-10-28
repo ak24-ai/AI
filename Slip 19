@@ -65,7 +65,7 @@ enc = ""
 for ch in text:
    if ch.isalpha():
       enc = enc + chr((ord(ch.upper()) - 65 + key) % 26 + 65)
- else:
+   else:
       enc = enc + ch
 print("Encrypted text:", enc)
 
@@ -83,7 +83,8 @@ print("Public key:", e, n)
 print("Private key:", d, n)
 M = int(input("Enter message number (0 to 32): "))
 
-C = (M ** e) % n print("Encrypted message:", C)
+C = (M ** e) % n 
+print("Encrypted message:", C)
 
 M = (C ** d) % n
 print("Decrypted message:", M)
