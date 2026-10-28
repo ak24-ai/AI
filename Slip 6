@@ -1,0 +1,97 @@
+Slip 06
+
+Q1) A Explain the key behaviors of cyber stalkers and discuss the misuse
+of social networking features
+
+1. Introduction
+
+Cyber stalking is the repeated use of the internet, social media, email, or other
+digital technologies to harass, threaten, monitor, or intimidate a person. Cyber
+stalkers may cause emotional stress and create fear in the victim.
+
+2. Key Behaviors of Cyber Stalkers
+
+1. Repeated unwanted messages: Sending continuous messages, emails, or
+comments even after the victim requests them to stop.
+2. Online monitoring: Regularly checking the victim's social media profiles, posts,
+activities, and online status to gather personal information.
+3. Threatening messages: Sending abusive, frightening, or threatening
+messages to create fear and mental pressure.
+4. Impersonation: Creating fake accounts using the victim's name, photographs,
+or personal details to damage their reputation.
+5. Collecting personal information: Gathering private details such as phone
+numbers, home addresses, workplace information, and daily routines.
+6. Spreading false information: Sharing rumours, edited photographs, or
+misleading content to embarrass or defame the victim.
+7. Unwanted contact through others: Contacting the victim's friends, relatives, or
+colleagues to obtain information or continue harassment.
+8. Tracking online activities: Misusing location-sharing features, check-ins, or
+tagged posts to discover the victim's whereabouts.
+
+
+3. Misuse of Social Networking Features Social networking platforms provide several features that can be misused by
+cyber stalkers.
+
+1. Fake profiles: Attackers create fake accounts to hide their identity and
+communicate with victims deceptively.
+2. Private messaging: Direct messages and chat features may be used to send
+repeated unwanted, abusive, or threatening messages.
+3. Location sharing and check-ins: Location tags and check-ins can reveal a
+person's current location or regular movements.
+4. Photo and video sharing: Personal photographs or videos may be copied,
+edited, or shared without permission to harass or embarrass someone.
+5. Friend requests and followers: Attackers may send repeated requests or use
+fake accounts to gain access to private posts and personal information.
+6. Comments and public posts: Comment sections and public posts may be
+misused to spread rumours, insults, threats, or defamatory content.
+7. Tagging and mentions: Repeatedly tagging a victim in unwanted posts or
+offensive content can draw unwanted attention and cause distress.
+8. Personal information exposure: Publicly available contact details, workplace
+information, and family details may be collected and misused for harassment.
+
+
+Q2) B Write a Python program to check password strength: Length ≥ 8
+and password must contain digits and special characters
+
+import string
+password = input("Enter your password: ")
+
+length_valid = len(password) >= 8
+
+digit_valid = any(char.isdigit() for char in password)
+
+special_valid = any(char in string.punctuation for char in
+password)
+print("\n----- Password Strength Report -----")
+print("Length >= 8:", length_valid)
+print("Contains digit:", digit_valid)
+print("Contains special character:", special_valid)
+
+if length_valid and digit_valid and special_valid:
+    print("\nPassword Strength: STRONG")
+else:
+    print("\nPassword Strength: WEAK")
+if not length_valid:
+    print("- Password must contain at least 8 characters.")
+ if not digit_valid:
+    print("- Password must contain at least one digit.")
+ if not special_valid: print("- Password must contain at least one special
+character.")
+
+
+
+OR Q2) B Write a Python program to implement Caesar Cipher for both
+encryption and decryption of a given text.
+
+text = input("Enter text: ")
+key = int(input("Enter key: "))
+
+enc = ""
+for ch in text:
+    enc = enc + chr((ord(ch) - 65 + key) % 26 + 65)
+print("Encrypted text:", enc)
+
+dec = ""
+for ch in enc:
+    dec = dec + chr((ord(ch) - 65 - key) % 26 + 65)
+print("Decrypted text:", dec)
