@@ -107,16 +107,16 @@ email = input("Enter the email message: ")
 email_lower = email.lower()
 spam_words_found = []
 for keyword in spam_keywords:
-if keyword in email_lower:
-spam_words_found.append(keyword)
+    if keyword in email_lower:
+       spam_words_found.append(keyword)
 print("\n---------- Result ----------")
 if len(spam_words_found) >= 2:
-print("Email Status: SPAM")
-print("Spam keywords found:", spam_words_found)
+    print("Email Status: SPAM")
+    print("Spam keywords found:", spam_words_found)
 else:
-print("Email Status: NOT SPAM")
-print("Spam keywords found:", spam_words_found)
-print("----------------------------")
+    print("Email Status: NOT SPAM")
+    print("Spam keywords found:", spam_words_found)
+    print("----------------------------")
 
 
 
