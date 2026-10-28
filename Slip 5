@@ -88,8 +88,7 @@ def hide_data():
   
     stego_img = stepic.encode(img, data)
  
-   output_name = input("Enter name for stego image (use .png):
-")
+    output_name = input("Enter name for stego image (use .png):")
  
    stego_img.save(output_name, format="PNG")
    print("Message successfully hidden!")
