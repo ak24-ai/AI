@@ -90,6 +90,18 @@ OR
 Q2) B Write a Python program to generate MD5, SHA-1, and SHA-256
 hashes of a file and verify its integrity.
 
+
+with open("akshada.txt", "w") as f:
+    f.write("Hello World")
+
+with open("copy.txt", "w") as f:
+    f.write("Hello World")
+
+print("Files created successfully")
+
+(create a file ☝🏻)
+
+
 import hashlib
 
 original_file = input("Enter original file name: ")
