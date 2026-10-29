@@ -73,14 +73,14 @@ def dictionary_attack(target):
        "welcome123", "computer@123", "hello123",
        "student123", "india@123", "python123"
  ]
-attempts = 0
-for pwd in passwords:
-    attempts += 1
-    print("Attempt", attempts, ":", pwd)
-    if pwd == target:
-        print("Password matched!")
-        print("Total attempts:", attempts)
-        return
+    attempts = 0
+    for pwd in passwords:
+        attempts += 1
+        print("Attempt", attempts, ":", pwd)
+        if pwd == target:
+           print("Password matched!")
+           print("Total attempts:", attempts)
+           return
  print("Password not found in dictionary.")
  print("Total attempts:", attempts)
 
