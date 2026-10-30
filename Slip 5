@@ -9,24 +9,24 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 public class ReverseFile {
- public static void main(String args[]) {
- Scanner sc = new Scanner(System.in);
- System.out.print("Enter file name: ");
- String fileName = sc.nextLine(); String content = "";
- try {
- FileReader fr = new FileReader(fileName);
- int ch;
- while ((ch = fr.read()) != -1) {
- content = content + (char) ch;
- }
- fr.close();
- System.out.println("\nFile contents in reverse order:");
- System.out.println("--------------------------------");
- for (int i = content.length() - 1; i >= 0; i--) {
- System.out.print(content.charAt(i));
- }
+  public static void main(String args[]) {
+   Scanner sc = new Scanner(System.in);
+   System.out.print("Enter file name: ");
+   String fileName = sc.nextLine(); String content = "";
+   try {
+     FileReader fr = new FileReader(fileName);  
+     int ch;
+     while ((ch = fr.read()) != -1) {
+      content = content + (char) ch;
+    }
+   fr.close();
+   System.out.println("\nFile contents in reverse order:");
+   System.out.println("--------------------------------");
+   for (int i = content.length() - 1; i >= 0; i--) {
+     System.out.print(content.charAt(i));
+  }
  } catch (IOException e) {
- System.out.println("Error: File not found or cannot be read.");
+    System.out.println("Error: File not found or cannot be read.");
  }
  sc.close();
  }
@@ -75,10 +75,10 @@ class Scientist extends Employee {
  this.publications = publications;
  }
  void display() {
- super.display();
- System.out.println("Department : " + deptname);
- System.out.println("Publications : " + publications);
- System.out.println("--------------------------------");
+  super.display();
+  System.out.println("Department : " + deptname);
+  System.out.println("Publications : " + publications);
+  System.out.println("--------------------------------");
  }
 }
 public class EmployeeDemo { public static void main(String args[]) {
@@ -88,38 +88,38 @@ public class EmployeeDemo { public static void main(String args[]) {
  sc.nextLine();
  Employee employees[] = new Employee[n];
  for (int i = 0; i < n; i++) {
- System.out.println("\nEmployee " + (i + 1));
- System.out.println("1. Manager");
- System.out.println("2. Scientist");
- System.out.print("Enter choice: ");
- int choice = sc.nextInt();
- sc.nextLine()
- System.out.print("Enter Employee Code: ");
- int empcode = sc.nextInt();
- sc.nextLine();
- System.out.print("Enter Employee Name: ");
- String empname = sc.nextLine();
- if (choice == 1) {
- System.out.print("Enter Designation: ");
- String designation = sc.nextLine();
- System.out.print("Enter Club Dues: ");
- double club_dues = sc.nextDouble();
- sc.nextLine();
- employees[i] = new Manager(
- empcode, empname, designation, club_dues
+   System.out.println("\nEmployee " + (i + 1));
+   System.out.println("1. Manager");
+   System.out.println("2. Scientist");
+   System.out.print("Enter choice: ");
+   int choice = sc.nextInt();
+   sc.nextLine()
+   System.out.print("Enter Employee Code: ");
+   int empcode = sc.nextInt();
+   sc.nextLine();
+   System.out.print("Enter Employee Name: ");
+   String empname = sc.nextLine();
+   if (choice == 1) {
+      System.out.print("Enter Designation: ");
+      String designation = sc.nextLine();
+      System.out.print("Enter Club Dues: ");
+      double club_dues = sc.nextDouble();
+      sc.nextLine();
+      employees[i] = new Manager(
+        empcode, empname, designation, club_dues
  );
  } else if (choice == 2) { System.out.print("Enter Department Name: ");
- String deptname = sc.nextLine();
- System.out.print("Enter Publications: ");
- String publications = sc.nextLine();
- employees[i] = new Scientist(
- empcode, empname, deptname, publications
+  String deptname = sc.nextLine();
+  System.out.print("Enter Publications: ");
+  String publications = sc.nextLine();
+  employees[i] = new Scientist(
+  empcode, empname, deptname, publications
  );
  } else {
- System.out.println("Invalid choice.");
+  System.out.println("Invalid choice.");
  i--;
  }
- }
+}
  System.out.println("\nEmployee Information");
  System.out.println("==============================");
  for (int i = 0; i < n; i++) {
